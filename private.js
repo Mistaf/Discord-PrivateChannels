@@ -28,6 +28,7 @@ exports.create = async function (message) {
             deny: ["CONNECT"]
         }]
     }).then(function(m){
+            message.reply("Your private channel is ready.")
             runTimer();
             function runTimer() {
                 setTimeout(function () {
@@ -69,7 +70,7 @@ exports.invite = function (message) {
             }
             let target=message.guild.members.get(userp);
             if(target==undefined){
-                message.channel.send("Cannot invite that person make sure u typed everything correctly");return;
+                message.channel.send("Cannot invite that person make sure u typed everything correctly\nCorrect usage `/privateinvite <@user/userID>");return;
             }
             guild.channels.find(channel=>channel.name===message.author.id+' Private Channel').overwritePermissions(target.id,{'CONNECT':true});
             message.channel.send(target+' you have been invited the private channel of '+message.author);
@@ -98,7 +99,7 @@ exports.kick = function (message) {
         }
         let target=message.guild.members.get(mentionedUser);
         if(target==undefined){
-            message.channel.send("Cannot remove that person make sure u typed everything correctly");
+            message.channel.send("Cannot remove that person make sure u typed everything correctly\nCorrect usage `/privatekick <@user/userID>");
             return;
         }
   
