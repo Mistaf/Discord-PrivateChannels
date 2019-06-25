@@ -1,6 +1,3 @@
-const Discord = require("discord.js");
-const bot = new Discord.Client();
-
 exports.create = async function (message) {
     let guild=message.guild;
     let everyone = guild.roles.find(role=>role.name==="@everyone");
@@ -10,7 +7,7 @@ exports.create = async function (message) {
     if(papa){
         for(i=0;i<papa.length;i++){
             if(papa[i].name==message.author.id+' Private Channel'){
-                message.reply("You can only have 1 private channel at the time").then(function(m){deletemsg(m);});
+                message.reply("You can only have 1 private channel at the time");
                 return;
             }
         }
@@ -50,7 +47,7 @@ exports.invite = function (message) {
     let guild=message.guild;
     let parent = guild.channels.find(channel=>channel.name==="Private Channels");
     if(parent==null){
-        message.reply("Make sure you got an private channel").then(function(m){deletemsg(m);});
+        message.reply("Make sure you got an private channel");
         return;
     }
     let papa=guild.channels.get(parent.id).children.array();
@@ -66,22 +63,20 @@ exports.invite = function (message) {
             }
             let target=message.guild.members.get(userp);
             if(target==undefined){
-                message.channel.send("Cannot invite that person make sure u typed everything correctly").then(function(m){
-                deletemsg(m);
-                });return;
+                message.channel.send("Cannot invite that person make sure u typed everything correctly");return;
             }
             guild.channels.find(channel=>channel.name===message.author.id+' Private Channel').overwritePermissions(target.id,{'CONNECT':true});
             message.channel.send(target+' you have been invited the private channel of '+message.author);
             return;}
         }
-        message.reply("Make sure you got an private channel").then(function(m){deletemsg(m);});
+        message.reply("Make sure you got an private channel");
     }
 }
 
 exports.kick = function (message) {
     if(!message)return;
     if(!message.member.voiceChannel){
-        message.reply("Join your voicechannel before kicking the person. You haven't even talked to him yet...").then(function(m){deletemsg(m);})
+        message.reply("Join your voicechannel before kicking the person. You haven't even talked to him yet...");
         return;
     }
     if(message.member.voiceChannel.name==message.author.id+" Private Channel"){
@@ -95,16 +90,16 @@ exports.kick = function (message) {
         }
         let target=message.guild.members.get(mentionedUser);
         if(target==undefined){
-            message.channel.send("Cannot remove that person make sure u typed everything correctly").then(function(m){deletemsg(m);});
+            message.channel.send("Cannot remove that person make sure u typed everything correctly");
             return;
         }
   
         voiceChannel.overwritePermissions(target.id,{'CONNECT':false});
 
         if(target.voiceChannel&&target.voiceChannel.name==message.author.id+" Private Channel")target.setVoiceChannel(null);
-        else message.reply("This creature isn't even in your channel...").then(function(m){deletemsg(m);})
+        else message.reply("This creature isn't even in your channel...")
       }else{
-          message.reply("Do you even own a private voicechannel???").then(function(m){deletemsg(m);})
+          message.reply("Do you even own a private voicechannel???")
       }
       
 }
@@ -138,9 +133,4 @@ function createParent(guild){
       .then(parent=>{return parent})
       .catch(console.error);
 
-}
-function deletemsg(m) {
-    setTimeout(function () {
-        if(m.deleteable)m.delete();
-    }, 6000);
 }
