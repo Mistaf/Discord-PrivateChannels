@@ -1,3 +1,7 @@
+/**
+ * Create the channel and its parent if the parent doesnt exist yet
+ * channels are named by users there ids to the bot doesnt have to keep logs of who owns what channel
+ */
 exports.create = async function (message) {
     let guild=message.guild;
     let everyone = guild.roles.find(role=>role.name==="@everyone");
@@ -42,8 +46,10 @@ exports.create = async function (message) {
 
 }
 
+/**
+ * Invite the the person you want to invite to you channel if you are in your channel
+ */
 exports.invite = function (message) {
-    
     let guild=message.guild;
     let parent = guild.channels.find(channel=>channel.name==="Private Channels");
     if(parent==null){
@@ -72,7 +78,9 @@ exports.invite = function (message) {
         message.reply("Make sure you got an private channel");
     }
 }
-
+/**
+ * kick the person out of your channel and makes it so the person can't join back
+ */
 exports.kick = function (message) {
     if(!message)return;
     if(!message.member.voiceChannel){
@@ -105,7 +113,9 @@ exports.kick = function (message) {
 }
 
 
-
+/**
+ * remove all empty private channels on the bot startup (for if he crashed and never noticed a channel go empty)
+ */
 exports.ready = function (bot) {
     let guilds = bot.guilds.array();
     guilds.forEach(guild => {
@@ -122,6 +132,10 @@ exports.ready = function (bot) {
         }
     });
 }
+/**
+ * creates the parent channel
+ * @param {*} guild the guild where the parent will be created in 
+ */
 function createParent(guild){
     return guild.createChannel('Private Channels', {
         type: 'category',
