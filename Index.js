@@ -56,5 +56,6 @@ function sendHelp(message){
         .addField("/privateinvite","Invite a person from the same discord server to your private channel by tagging them")
         .addField("/privatekick","Kick the person from your private channel")
         .setColor('#'+Math.random().toString(16).slice(2, 8));
-    message.author.send(help);
+   message.author.send(help).then(m => message.reply("I have Send you a list of my commands."))
+        .catch(err=>message.reply("Cannot dm you. Make sure to enable dms for me to send you the help."));
 }
