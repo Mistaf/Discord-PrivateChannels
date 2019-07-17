@@ -26,6 +26,10 @@ exports.create = async function (message) {
         {
             id: everyone,
             deny: ["CONNECT"]
+        },
+        {
+            id: message.guild.me.id,
+            allow: ['MANAGE_CHANNELS','CONNECT']        
         }]
     }).then(function(m){
             message.reply("Your private channel is ready.")
@@ -34,10 +38,14 @@ exports.create = async function (message) {
                 setTimeout(function () {
                     //delete if possible
                     if(m.deleteable)m.delete();
-                    let rmvchannel =guild.channels.find(channel=>channel.name===message.author.id+' Private Channel');
-                    if(rmvchannel){
+                    let rmvchannel = guild.channels.find(channel=>channel.name===message.author.id+' Private Channel');
+                    if(rmvchannel&&!rmvchannel.deleted){
                         //remove channel if nobody joined after 10 seconds
-                        if(rmvchannel.members.array().length==0)rmvchannel.delete();
+                        if(rmvchannel.members.array().length==0)rmvchannel.delete()
+                        .then(function(){
+                            message.reply("Removed your channel because nobody was in it.")
+                        })
+                        .catch(console.error());
                     }
                     
                 }, 10000);

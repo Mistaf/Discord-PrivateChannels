@@ -17,8 +17,8 @@ bot.on("message",message=>{
     let args = message.content.toLowerCase().split(' ');
     if(message.channel.type!="text"||message.author.bot)return;
 
-    if(!message.guild.me.hasPermission("ADMINISTRATOR")){
-        message.channel.send("I do not have the permissions to manage channels!\nPlease make sure the bot is Admin");
+    if(!message.guild.me.hasPermission("MANAGE_CHANNELS")||!message.guild.me.hasPermission("MOVE_MEMBERS")){
+        message.channel.send("I do not have the permissions to manage channels!\nPlease make sure that the bot got permission for `MANAGE_CHANNELS` and `MOVE_MEMBERS`");
         return;
     }
     switch (args[0]) {
