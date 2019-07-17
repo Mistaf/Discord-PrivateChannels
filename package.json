@@ -1,6 +1,6 @@
 {
   "name": "privatechannels-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Creates Private VoiceChannels in servers for people to use",
   "main": "Index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Mistaf/Discord-PrivateChannels.git"
   },
   "author": "Mistaf",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Mistaf/Discord-PrivateChannels/issues"
   },
