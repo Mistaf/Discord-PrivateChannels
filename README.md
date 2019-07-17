@@ -13,7 +13,7 @@ to get a list of the commands and get started with the bot just type /privatehel
 
 ### Invite bot
 
-[here](https://discordapp.com/oauth2/authorize?client_id=592883479394517013&scope=bot&permissions=8/) is a link to invite the bot to your own server
+[here](https://discordapp.com/oauth2/authorize?client_id=592883479394517013&scope=bot&permissions=16777232/) is a link to invite the bot to your own server
 
 ## Built With
 
